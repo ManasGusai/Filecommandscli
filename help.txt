@@ -1,0 +1,17 @@
+
+...........HELP............
+
+You can make file using....
+fs make file <name.ext>
+
+To make a folder use.......
+fs make folder <name>
+
+To nest folders use........
+fs make folder <name1/name2/..>
+
+To make file along with nested folder use..
+fs make folder <name1/name.ext>
+
+Print all files and folders in your project
+fs -ls
