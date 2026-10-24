@@ -43,6 +43,8 @@ int main(int argc, char *argv[])
         {
             std::cerr << "Error: " << e.what() << '\n';
         }     
+    }else{
+        print_help();
     }
 
     return 0;

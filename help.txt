@@ -1,17 +1,23 @@
 
 ...........HELP............
 
-You can make file using....
-fs make file <name.ext>
+MAKE->
+    FILE:   ./fs make file <name.ext>
+    FOLDER: ./fs make folder <name>
+            ./fs make folder <name1/name2/..>
+            ./fs make folder <name1/name.ext>
 
-To make a folder use.......
-fs make folder <name>
+REMOVE->    ./fs remove file <name>
+    FOLDER: ./fs remove file a
+    FILE:   ./fs remove a.txt
 
-To nest folders use........
-fs make folder <name1/name2/..>
+COPY->      ./fs copy folder <src> <dst>
+    FOLDER: ./fs copy file a/test.cpp b
+    FILE:   ./fs copy folder a b
 
-To make file along with nested folder use..
-fs make folder <name1/name.ext>
+RENAME->     ./fs rename src dst
+    FOLDER: ./fs rename a b
+    FILE:   ./fs rename a/test.cpp a/best.cpp
 
 Print all files and folders in your project
-fs -ls
+            ./fs -ls

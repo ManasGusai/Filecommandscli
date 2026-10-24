@@ -17,7 +17,7 @@ static void print_version()
     std::cout << "fs VERSION: " << app::VERSION << '\n';
 }
 
-static void print_help()
+void print_help()
 {
     std::ifstream file("help.txt");
 
@@ -64,9 +64,19 @@ static void print_available_options() {
     }
 }
 
-static void print_ls() {
-    for(const auto& entry : fs::recursive_directory_iterator(".")) {
-        std::cout << entry.path() << "\n";
+static void print_ls()
+{
+    for (auto it = fs::recursive_directory_iterator(".");
+         it != fs::recursive_directory_iterator();
+         ++it)
+    {
+        if (it->path().filename() == ".git")
+        {
+            it.disable_recursion_pending();
+            continue;
+        }
+
+        std::cout << it->path() << '\n';
     }
 }
 

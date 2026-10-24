@@ -4,6 +4,8 @@
 #include "commands.hpp"
 #include "token.hpp"
 
+void print_help();
+
 class Parser
 {
 public:
