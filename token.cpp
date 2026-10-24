@@ -11,9 +11,6 @@ const char* tokenTypeName(TokenType type)
         case TokenType::Keyword:
             return "Keyword";
 
-        case TokenType::Slash:
-            return "Slash";
-
         case TokenType::Dot:
             return "Dot";
     }

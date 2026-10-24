@@ -27,40 +27,23 @@ std::vector<Token> Lexer::tokenize(const std::string& source)
                 current.clear();
             }
         }
-        else if (c == '/')
-        {
-            if (!current.empty())
-            {
-                tokens.push_back({
-                    classify(current),
-                    current
-                });
+        // else if (c == '/')
+        // {
+        //     if (!current.empty())
+        //     {
+        //         tokens.push_back({
+        //             classify(current),
+        //             current
+        //         });
 
-                current.clear();
-            }
+        //         current.clear();
+        //     }
 
-            tokens.push_back({
-                TokenType::Slash,
-                "/"
-            });
-        }
-        /*else if (c == '.')
-        {
-            if (!current.empty())
-            {
-                tokens.push_back({
-                    classify(current),
-                    current
-                });
-
-                current.clear();
-            }
-
-            tokens.push_back({
-                TokenType::Dot,
-                "."
-            });
-        }*/
+        //     tokens.push_back({
+        //         TokenType::Slash,
+        //         "/"
+        //     });
+        // }
         else
         {
             current += c;

@@ -147,10 +147,10 @@ Command Parser::parse(const std::vector<Token>& tokens)
     }
 
     if (is_available_option(tokens[0].text)){
-        return {
-            .name = "options",
-            .args ={}
-        };
+        Command c;
+        c.name = "options";
+        c.args = {};
+        return c;
     }
 
     if(!option_flag){
@@ -191,8 +191,7 @@ Command Parser::parseMake(const std::vector<Token>& tokens)
 
     for (size_t i = 2; i < tokens.size(); ++i)
     {
-        if(tokens[i].type == TokenType::Identifier ||
-            tokens[i].type == TokenType::Slash){           
+        if(tokens[i].type == TokenType::Identifier){           
             command.args.push_back(tokens[i].text);
         }
     }
@@ -204,7 +203,7 @@ Command Parser::parseRemove(const std::vector<Token>& tokens)
 {
     if (tokens.size() < 3)
     {
-        throw std::runtime_error("Invalid make command");
+        throw std::runtime_error("Invalid remove command");
     }
 
     if (tokens[1].text != "folder" &&
@@ -222,8 +221,7 @@ Command Parser::parseRemove(const std::vector<Token>& tokens)
 
     for (size_t i = 2; i < tokens.size(); ++i)
     {
-        if(tokens[i].type == TokenType::Identifier ||
-            tokens[i].type == TokenType::Slash){           
+        if(tokens[i].type == TokenType::Identifier){           
             command.args.push_back(tokens[i].text);
         }
     }
@@ -235,7 +233,7 @@ Command Parser::parseCopy(const std::vector<Token>& tokens)
 {
     if (tokens.size() < 3)
     {
-        throw std::runtime_error("Invalid make command");
+        throw std::runtime_error("Invalid copy command");
     }
 
     // if (tokens[1].text != "folder" &&
@@ -253,8 +251,7 @@ Command Parser::parseCopy(const std::vector<Token>& tokens)
 
     for (size_t i = 2; i < tokens.size(); ++i)
     {
-        if(tokens[i].type == TokenType::Identifier ||
-            tokens[i].type == TokenType::Slash){           
+        if(tokens[i].type == TokenType::Identifier){           
             command.args.push_back(tokens[i].text);
         }
     }
@@ -264,6 +261,23 @@ Command Parser::parseCopy(const std::vector<Token>& tokens)
 
 Command Parser::parseRename(const std::vector<Token>& tokens)
 {
-    std::string a = tokens[0].text;
-    return {};
+    if (tokens.size() < 2)
+    {
+        throw std::runtime_error("Invalid rename command");
+    }
+
+    Command command;
+
+    command.name = "rename";
+
+    command.args.push_back(tokens[1].text);
+
+    for (size_t i = 2; i < tokens.size(); ++i)
+    {
+        if(tokens[i].type == TokenType::Identifier){           
+            command.args.push_back(tokens[i].text);
+        }
+    }
+
+    return command;
 }

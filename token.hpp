@@ -6,7 +6,6 @@
 enum class TokenType {
     Identifier,
     Keyword,
-    Slash,
     Dot
 };
 

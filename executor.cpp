@@ -28,7 +28,7 @@ void Executor::execute(const Command& command)
     }
     else if (command.name == "rename")
     {
-        execute_copy(command.args);
+        execute_rename(command.args);
     }
 }
 
@@ -131,13 +131,40 @@ void Executor::execute_copy(const std::vector<std::string>& args) {
     fs::path src = base / args[1];
     fs::path dst = base / args[2];
 
-    fs::copy_file(src, dst);
+    dst /= src.filename();
+
+    if(debug)
+    {
+        std::cout << "SRC: " << src << std::endl;
+        std::cout << "DST: " << dst << std::endl;
+    }
+
+    if(args[0] == "file") {
+        if (fs::copy_file(src, dst))
+        {
+            std::cout << "File " << src << "successfully copied to destination " << dst << std::endl;
+        }else{
+            throw std::runtime_error("File was not copied");
+        }
+    }
+
+    if(args[0] == "folder") {
+        fs::copy(src,dst);
+        std::cout << "Folder " << src << "successfully copied to " << dst << std::endl;
+    }
 }
 
 void Executor::execute_rename(const std::vector<std::string>& args) {
+    fs::path base = fs::current_path();
+
     if (debug)
     {
         for (const auto& arg : args)
             std::cout << "[" << arg << "]\n";
     }
+
+    fs::path src = base/args[0];
+    fs::path dst = base / args[1];
+
+    fs::rename(src, dst);
 }
